@@ -13,12 +13,9 @@ dotenv.config({
 
 const app: Application = express();
 
-//EJEMPLO CONTENEDOR DE DEPENDENCIAS
-//import { container } from './container';
-//import { TestService } from './service/test.service';
-//Obtener dependencia
-//const testService = container.resolve<TestService>('testService');
-//console.log(testService.get());
+//Json Support
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //Cargar contenedor
 loadContainer(app);
@@ -27,4 +24,5 @@ app.use(loadControllers(
     'controllers/*.ts' //Ruta de los controladors
 , { cwd: __dirname }));
 
-export { app };
+
+export { app }; 
