@@ -3,7 +3,6 @@ import { scopePerRequest } from "awilix-express";
 import { Application } from "express";
 import { SubscriptionMySqlRepository } from "./service/repositories/impl/mysql/subscription.repository";
 import { SubscriptionService } from "./service/subscription.service";
-import { TestService } from "./service/test.service";
 
 export default (app: Application) => {
     //Crear contenedor
@@ -19,8 +18,7 @@ export default (app: Application) => {
         subscriptionRepository: asClass(SubscriptionMySqlRepository).scoped(),
 
         //Services
-        subscriptionService: asClass(SubscriptionService).scoped(),
-        testService: asClass(TestService).scoped()
+        subscriptionService: asClass(SubscriptionService).scoped(),     
     });
 
     //Se agrega para registar awilix-express

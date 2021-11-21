@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 
 //Config of ENV variables
 dotenv.config({
-    path: `${__dirname}/../../..//config/${process.env.NODE_ENV}.env`
+    path: `${__dirname}/../../config/${process.env.NODE_ENV}.env`
 })
-
+console.log(__dirname)
 //Exportamos la conexion
 export default createPool({
     host: process.env.db_mysql_host,
