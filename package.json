@@ -1,0 +1,31 @@
+{
+  "name": "api.wallet",
+  "version": "1.0.0",
+  "description": "An API to managment incomes and outcomes",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/* --fix",
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+  },
+  "author": "Luis Garza",
+  "license": "ISC",
+  "dependencies": {
+    "awilix": "^6.0.0",
+    "awilix-express": "^6.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.2.0",
+    "nodemon": "^2.0.15",
+    "ts-node-dev": "^1.1.8"
+  }
+}
