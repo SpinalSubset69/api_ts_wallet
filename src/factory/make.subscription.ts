@@ -3,7 +3,7 @@ import { RequiredParam } from "../common/exceptions/required.param";
 import { SubscriptionCreateDto, SubscriptionUpdateDto } from "../dtos/subscription.dto";
 
 export function MakeSubscription(subscriptionInfo: SubscriptionCreateDto){
-    if(!subscriptionInfo){
+    if(Object.keys(subscriptionInfo).length === 0){
         RequiredParam('Subscription Info')
     }
     const validateSubscriptionInfo = Validate(subscriptionInfo);

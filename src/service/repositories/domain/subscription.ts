@@ -1,6 +1,6 @@
 export interface Subscription{
     id?: number;
-    user_id: number;
+    user_id?: number;
     code: string;
     amount: number;
     cron: string;

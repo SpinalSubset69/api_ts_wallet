@@ -1,11 +1,11 @@
 import { ApplicationException } from "../common/exceptions/application.exception";
 import { SubscriptionCreateDto, SubscriptionUpdateDto } from "../dtos/subscription.dto";
 import { Subscription } from "./repositories/domain/subscription";
-import { SubscriptionRepository } from "./repositories/subscription.repository";
+import { ISubscriptionRepository } from "./repositories/subscription.repository";
 
 
 export class SubscriptionService{
-    constructor(private readonly subscriptionRepository:SubscriptionRepository){}
+    constructor(private readonly subscriptionRepository:ISubscriptionRepository){}
 
     public async find(id:number): Promise<Subscription | null> {
         return await this.subscriptionRepository.find(id);

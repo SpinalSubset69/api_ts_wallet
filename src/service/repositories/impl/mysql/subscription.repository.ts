@@ -1,10 +1,10 @@
 //Se necesita la conexion
 import { NotFoundException } from '../../../../common/exceptions/application.exception';
 import { Subscription } from '../../domain/subscription';
-import { SubscriptionRepository } from '../../subscription.repository';
+import { ISubscriptionRepository } from '../../subscription.repository';
 import connector from './../../../../common/persistence/mysql.persistence'
 
-export class SubscriptionMySqlRepository implements SubscriptionRepository {
+export class SubscriptionMySqlRepository implements ISubscriptionRepository {
 
     public async all(): Promise<Subscription[]> {
         const [rows]: any[] = await connector.execute(
@@ -40,34 +40,36 @@ export class SubscriptionMySqlRepository implements SubscriptionRepository {
     public async store(entry: Subscription): Promise<Subscription> {
         const now = new Date();
         //Object to return
-        const savedSubscription: Subscription = {
-            user_id: entry.user_id, code: entry.code, amount: entry.amount, cron: entry.cron, created_at: now
+        const savedSubscription = {
+            user_id: entry.user_id, 
+            amount: entry.amount,
+            code: entry.code,
+            created_at: now,
+            cron: entry.cron
         }
         await connector.execute(
             'INSERT INTO wallet_subscription(user_id, code, amount, cron, created_at) VALUES(?,?,?,?,?)',
             [savedSubscription.user_id, savedSubscription.code, savedSubscription.amount, savedSubscription.cron, savedSubscription.created_at]
         );
 
-        return savedSubscription;
+        return savedSubscription as Subscription;
     }
 
     public async update(entry: Subscription): Promise<Subscription> {
         const now = new Date();
-        const updatedSubscription: Subscription = {
-            id: entry.id,
-            user_id: entry.user_id, 
-            code: entry.code, 
-            amount: entry.amount, 
-            cron: entry.cron, 
-            updated_at: now, 
-            created_at: entry.created_at
+        const updatedSubscription ={ 
+            id: entry.id,            
+            amount: entry.amount,
+            code: entry.code,
+            updated_at: now,
+            cron: entry.cron
         }
         await connector.execute(
-            'UPDATE  wallet_subscription SET user_id = ?, code = ?, amount = ?, cron = ?, updated_at = ? WHERE id = ?',
-            [updatedSubscription.user_id, updatedSubscription.code, updatedSubscription.amount, updatedSubscription.cron, updatedSubscription.updated_at, updatedSubscription.id]
+            'UPDATE  wallet_subscription SET code = ?, amount = ?, cron = ?, updated_at = ? WHERE id = ?',
+            [updatedSubscription.code, updatedSubscription.amount, updatedSubscription.cron, updatedSubscription.updated_at, updatedSubscription.id]
         );
 
-        return updatedSubscription;
+        return updatedSubscription as Subscription;
     }
 
     public async remove(id: number): Promise<void> {        

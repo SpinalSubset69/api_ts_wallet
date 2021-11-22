@@ -1,6 +1,8 @@
 import { asClass, createContainer } from "awilix";
 import { scopePerRequest } from "awilix-express";
 import { Application } from "express";
+import { MovementService } from "./service/movement.service";
+import { MovementMysqlRepository } from "./service/repositories/impl/mysql/movement.repository";
 import { SubscriptionMySqlRepository } from "./service/repositories/impl/mysql/subscription.repository";
 import { SubscriptionService } from "./service/subscription.service";
 
@@ -14,11 +16,13 @@ export default (app: Application) => {
     //Registrar dependencias
     container.register({
         //se especifica la clase que sera la dependencia
-        //Repositories
+        //MySql Repositories
         subscriptionRepository: asClass(SubscriptionMySqlRepository).scoped(),
+        movementRepository: asClass(MovementMysqlRepository).scoped(),
 
         //Services
-        subscriptionService: asClass(SubscriptionService).scoped(),     
+        subscriptionService: asClass(SubscriptionService).scoped(),   
+        movementService: asClass(MovementService).scoped()  
     });
 
     //Se agrega para registar awilix-express
