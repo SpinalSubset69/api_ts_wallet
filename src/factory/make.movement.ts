@@ -44,7 +44,7 @@ function ValidateType(type:number){
         throw new InvalidPropertyError('Type must be a number');
     }
 
-    if(type < 0  || type > 1){
+    if(type < 1  || type > 2){
         throw new InvalidPropertyError('Invalid Movement Type, valid type: { 0 , 1}');
     }
 }

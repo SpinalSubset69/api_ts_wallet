@@ -3,7 +3,6 @@ import { BaseController } from "../common/controller/base.contrller";
 import { MovementService } from "../service/movement.service";
 import { Request, Response } from 'express';
 import { MakeMovement } from "../factory/make.movement";
-import { MakeUpdateMovement } from "../factory/make.updateMovement";
 
 @route('/movement')
 export class MovementController extends BaseController{
@@ -57,40 +56,5 @@ export class MovementController extends BaseController{
         }catch(err:any){
             this.handleException(err, res);
         }
-    }
-
-    @PUT()
-    @route('/:id')
-    public async update(req: Request, res: Response){
-        try{
-            const id = parseInt(req.params.id);
-            const validatedMovementToUpdate = MakeUpdateMovement(req.body);
-            const updatedMovement = await this.movementService.update(id, validatedMovementToUpdate);
-
-            res.send({
-                statusCode: 200,
-                message: 'Movement updated',
-                data: updatedMovement
-            })
-        }catch(err:any){
-            this.handleException(err, res);
-        }
-    }
-
-    @DELETE()
-    @route('/:id')
-    public async remove(req: Request, res: Response){
-        try{
-            const id = parseInt(req.params.id);
-            await this.movementService.delete(id);
-
-            res.json({
-                statusCode: 200,
-                message: 'Movement Removed'
-            })
-        }catch(err:any){
-            this.handleException(err, res);
-        }
-    }
-
+    }   
 }

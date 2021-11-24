@@ -1,7 +1,7 @@
 export interface Balance{
-    id: number,
+    id?: number,
     user_id: number,
-    amuount: number,
+    amount: number,
     created_at: Date | null,
-    updated_at: Date | null
+    updated_at?: Date | null
 }

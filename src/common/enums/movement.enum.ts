@@ -1,4 +1,4 @@
 export enum MovementType{
-    income = 0,
-    outcome = 1
+    income = 1,
+    outcome = 2
 }

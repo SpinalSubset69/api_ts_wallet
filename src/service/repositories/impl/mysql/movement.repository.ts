@@ -6,6 +6,10 @@ import { couldStartTrivia } from "typescript";
 
 export class MovementMysqlRepository implements IMovementRepository{
     
+    getByUserid(userId: number): Promise<Movement[]> {
+        throw new Error("Method not implemented.");
+    }
+    
     public async all(): Promise<Movement[]> {
         const [rows]: any[] = await connector.execute(
             'SELECT * FROM wallet_movement ORDER BY id DESC'
@@ -40,7 +44,7 @@ export class MovementMysqlRepository implements IMovementRepository{
             created_at: now
         };
         await connector.execute(
-            'INSERT INTO wallet_movement(user_id, type, amount, created_at) values( ?, ?, ?, ?) ',
+            'INSERT INTO wallet_movement(user_id, type, amount, created_at) VALUES( ?, ?, ?, ?) ',
             [storedMovement.user_id, 
             storedMovement.type,
             storedMovement.amount, 
